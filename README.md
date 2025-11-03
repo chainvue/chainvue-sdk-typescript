@@ -1,225 +1,93 @@
-# ChainVue TypeScript SDK
+## @chainvue/sdk@v0.1.0-test4
 
-Official TypeScript/JavaScript SDK for the ChainVue Blockchain API.
+This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
-[![npm version](https://badge.fury.io/js/%40chainvue%2Fsdk.svg)](https://www.npmjs.com/package/@chainvue/sdk)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+Environment
+* Node.js
+* Webpack
+* Browserify
 
-## Installation
+Language level
+* ES5 - you must have a Promises/A+ library installed
+* ES6
 
-```bash
-npm install @chainvue/sdk
-# or
-yarn add @chainvue/sdk
-# or
-pnpm add @chainvue/sdk
+Module system
+* CommonJS
+* ES6 module system
+
+It can be used in both TypeScript and JavaScript. In TypeScript, the definition will be automatically resolved via `package.json`. ([Reference](https://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html))
+
+### Building
+
+To build and compile the typescript sources to javascript use:
+```
+npm install
+npm run build
 ```
 
-## Quick Start
+### Publishing
 
-```typescript
-import { ChainVueAPI } from '@chainvue/sdk';
+First build the package then run `npm publish`
 
-// Initialize the client
-const api = new ChainVueAPI({
-  basePath: 'https://api.chainvue.io',
-  apiKey: 'va_your_api_key_here'
-});
+### Consuming
 
-// Get the latest block
-const block = await api.getLatestBlock();
-console.log(`Latest block: #${block.data.height}`);
+navigate to the folder of your consuming project and run one of the following commands.
 
-// Query a transaction
-const tx = await api.getTransaction('txid_here');
-console.log(tx.data);
+_published:_
 
-// Check address balance
-const address = await api.getAddressBalance('RXL3YXG2ceaB6C5hfJcN4fvmLH2C34knhA');
-console.log(`Balance: ${address.data.balance} VRSC`);
+```
+npm install @chainvue/sdk@v0.1.0-test4 --save
 ```
 
-## Features
+_unPublished (not recommended):_
 
-- ✅ **Full TypeScript support** with auto-generated types
-- ✅ **Promise-based API** using async/await
-- ✅ **Automatic retries** and error handling
-- ✅ **Multi-chain support** (VRSC, VRSCTEST)
-- ✅ **Complete API coverage** for all endpoints
-- ✅ **IDE autocomplete** and IntelliSense
-
-## API Reference
-
-### Blocks
-
-```typescript
-// Get latest block
-const latest = await api.getLatestBlock();
-
-// Get block by height or hash
-const block = await api.getBlock('12345');
-const block = await api.getBlock('00000000000a1b2c3d...');
+```
+npm install PATH_TO_GENERATED_PACKAGE --save
 ```
 
-### Transactions
+### Documentation for API Endpoints
 
-```typescript
-// Get transaction
-const tx = await api.getTransaction('txid');
+All URIs are relative to *http://localhost*
 
-// Get mempool
-const mempool = await api.getMempool();
-```
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+*AddressesApi* | [**getAddress**](docs/AddressesApi.md#getaddress) | **GET** /v1/addresses/{address} | 
+*AddressesApi* | [**getAddressBalance**](docs/AddressesApi.md#getaddressbalance) | **GET** /v1/addresses/{address}/balance | 
+*AddressesApi* | [**getAddressTransactions**](docs/AddressesApi.md#getaddresstransactions) | **GET** /v1/addresses/{address}/transactions | 
+*BlocksApi* | [**getBlock**](docs/BlocksApi.md#getblock) | **GET** /v1/blocks/{height_or_hash} | 
+*BlocksApi* | [**getLatestBlock**](docs/BlocksApi.md#getlatestblock) | **GET** /v1/blocks/latest | 
+*ChainsApi* | [**listChains**](docs/ChainsApi.md#listchains) | **GET** /v1/chains | 
+*HealthApi* | [**apiStatus**](docs/HealthApi.md#apistatus) | **GET** /v1/status | 
+*HealthApi* | [**healthCheck**](docs/HealthApi.md#healthcheck) | **GET** /health | 
+*IdentitiesApi* | [**getIdentity**](docs/IdentitiesApi.md#getidentity) | **GET** /v1/identities/{name_or_address} | 
+*IdentitiesApi* | [**searchIdentities**](docs/IdentitiesApi.md#searchidentities) | **GET** /v1/identities | 
+*SearchApi* | [**universalSearch**](docs/SearchApi.md#universalsearch) | **GET** /v1/search | 
+*TransactionsApi* | [**getMempool**](docs/TransactionsApi.md#getmempool) | **GET** /v1/transactions/mempool | 
+*TransactionsApi* | [**getTransaction**](docs/TransactionsApi.md#gettransaction) | **GET** /v1/transactions/{txid} | 
 
-### Addresses
 
-```typescript
-// Get address info
-const address = await api.getAddress('RXL3YXG2ceaB6C5hfJcN4fvmLH2C34knhA');
+### Documentation For Models
 
-// Get address balance
-const balance = await api.getAddressBalance('RXL3YXG2ceaB6C5hfJcN4fvmLH2C34knhA');
+ - [Address](docs/Address.md)
+ - [ApiResponse](docs/ApiResponse.md)
+ - [ApiResponseMeta](docs/ApiResponseMeta.md)
+ - [Block](docs/Block.md)
+ - [Chain](docs/Chain.md)
+ - [Currency](docs/Currency.md)
+ - [HealthStatus](docs/HealthStatus.md)
+ - [Identity](docs/Identity.md)
+ - [ResponseMeta](docs/ResponseMeta.md)
+ - [SearchResult](docs/SearchResult.md)
+ - [Transaction](docs/Transaction.md)
 
-// Get address transactions
-const txs = await api.getAddressTransactions('RXL3YXG2ceaB6C5hfJcN4fvmLH2C34knhA', {
-  page: 1,
-  limit: 20
-});
-```
 
-### Identities (VerusID)
+<a id="documentation-for-authorization"></a>
+## Documentation For Authorization
 
-```typescript
-// Get identity
-const identity = await api.getIdentity('myid@');
 
-// Search identities
-const results = await api.searchIdentities('search_term');
-```
+Authentication schemes defined for the API:
+<a id="api_key"></a>
+### api_key
 
-### Chains
+- **Type**: Bearer authentication (API Key)
 
-```typescript
-// List supported chains
-const chains = await api.listChains();
-```
-
-### Search
-
-```typescript
-// Universal search (finds blocks, txs, addresses, identities)
-const result = await api.universalSearch('query');
-```
-
-## Configuration
-
-```typescript
-import { ChainVueAPI } from '@chainvue/sdk';
-
-const api = new ChainVueAPI({
-  basePath: 'https://api.chainvue.io',  // API base URL
-  apiKey: 'va_your_api_key',             // Your API key
-  timeout: 30000,                         // Request timeout (ms)
-  headers: {                              // Custom headers
-    'X-Custom-Header': 'value'
-  }
-});
-```
-
-## Error Handling
-
-```typescript
-import { ChainVueAPI, ApiError } from '@chainvue/sdk';
-
-const api = new ChainVueAPI({
-  basePath: 'https://api.chainvue.io',
-  apiKey: 'va_your_api_key'
-});
-
-try {
-  const block = await api.getBlock('invalid');
-} catch (error) {
-  if (error instanceof ApiError) {
-    console.error(`API Error: ${error.status} - ${error.message}`);
-  } else {
-    console.error('Unexpected error:', error);
-  }
-}
-```
-
-## Examples
-
-### Monitor Address for Payments
-
-```typescript
-async function monitorPayment(address: string, expectedAmount: number) {
-  const api = new ChainVueAPI({
-    basePath: 'https://api.chainvue.io',
-    apiKey: process.env.CHAINVUE_API_KEY!
-  });
-
-  while (true) {
-    const balance = await api.getAddressBalance(address);
-
-    if (balance.data.balance >= expectedAmount) {
-      console.log('Payment received!');
-      return true;
-    }
-
-    await new Promise(resolve => setTimeout(resolve, 10000)); // Check every 10s
-  }
-}
-```
-
-### Get Transaction Confirmations
-
-```typescript
-async function getConfirmations(txid: string) {
-  const api = new ChainVueAPI({
-    basePath: 'https://api.chainvue.io',
-    apiKey: process.env.CHAINVUE_API_KEY!
-  });
-
-  const tx = await api.getTransaction(txid);
-  const latestBlock = await api.getLatestBlock();
-
-  return latestBlock.data.height - tx.data.height;
-}
-```
-
-## Multi-Chain Support
-
-```typescript
-// Query mainnet
-const vrscBalance = await api.getAddressBalance(address, {
-  chainId: 'VRSC'
-});
-
-// Query testnet
-const testBalance = await api.getAddressBalance(address, {
-  chainId: 'VRSCTEST'
-});
-```
-
-## Development
-
-This SDK is auto-generated from the ChainVue OpenAPI specification.
-
-**Do not manually edit the generated files.** Changes will be overwritten on the next generation.
-
-## Links
-
-- [API Documentation](https://api.chainvue.io/swagger-ui)
-- [ChainVue Website](https://chainvue.io)
-- [GitHub Repository](https://github.com/chainvue/chainvue-sdk-typescript)
-- [Report Issues](https://github.com/chainvue/chainvue-sdk-typescript/issues)
-
-## License
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
-## Support
-
-- Email: support@chainvue.io
-- Discord: [Join our community](https://discord.gg/chainvue)
-- Documentation: https://docs.chainvue.io
