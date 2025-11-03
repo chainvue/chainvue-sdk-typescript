@@ -31,14 +31,19 @@ yarn add @chainvue/sdk
 pnpm add @chainvue/sdk
 ```
 
+## Authentication
+
+Most ChainVue API endpoints require an API key for authentication. Get your free API key at [https://api.chainvue.io](https://api.chainvue.io).
+
 ## Quick Start
 
 ```typescript
 import { Configuration, BlocksApi } from '@chainvue/sdk';
 
-// Configure the SDK
+// Configure the SDK with your API key
 const config = new Configuration({
-  basePath: 'https://api.chainvue.io'
+  basePath: 'https://api.chainvue.io',
+  apiKey: 'your-api-key-here'
 });
 
 // Create API instance
@@ -192,7 +197,19 @@ console.log(status.data);
 import { Configuration } from '@chainvue/sdk';
 
 const config = new Configuration({
-  basePath: 'https://api.chainvue.io'
+  basePath: 'https://api.chainvue.io',
+  apiKey: 'your-api-key-here'
+});
+```
+
+### Using Environment Variables
+
+```typescript
+import { Configuration } from '@chainvue/sdk';
+
+const config = new Configuration({
+  basePath: 'https://api.chainvue.io',
+  apiKey: process.env.CHAINVUE_API_KEY
 });
 ```
 
@@ -423,6 +440,7 @@ This SDK is **auto-generated** from the ChainVue OpenAPI specification.
 ## Links
 
 - **Live API:** [https://api.chainvue.io](https://api.chainvue.io)
+- **API Documentation:** [https://docs.chainvue.io](https://docs.chainvue.io)
 - **npm Package:** [@chainvue/sdk](https://www.npmjs.com/package/@chainvue/sdk)
 - **SDK Repository:** [chainvue/chainvue-sdk-typescript](https://github.com/chainvue/chainvue-sdk-typescript)
 - **OpenAPI Spec:** [openapi.json](https://api.chainvue.io/api-docs/openapi.json)
