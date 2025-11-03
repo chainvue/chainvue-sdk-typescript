@@ -1,4 +1,4 @@
-## @chainvue/sdk@v0.1.0-test4
+## @chainvue/sdk@v0.1.0-test5
 
 This generator creates TypeScript/JavaScript client that utilizes [axios](https://github.com/axios/axios). The generated Node module can be used in the following environments:
 
@@ -36,7 +36,7 @@ navigate to the folder of your consuming project and run one of the following co
 _published:_
 
 ```
-npm install @chainvue/sdk@v0.1.0-test4 --save
+npm install @chainvue/sdk@v0.1.0-test5 --save
 ```
 
 _unPublished (not recommended):_

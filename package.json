@@ -1,6 +1,6 @@
 {
   "name": "@chainvue/sdk",
-  "version": "v0.1.0-test4",
+  "version": "v0.1.0-test5",
   "description": "OpenAPI client for @chainvue/sdk",
   "author": "OpenAPI-Generator Contributors",
   "repository": {
