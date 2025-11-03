@@ -7,32 +7,12 @@ Official TypeScript/JavaScript SDK for the ChainVue Blockchain API.
 
 ## Installation
 
-This package is published to GitHub Packages. You'll need to configure npm to use GitHub Packages for the `@chainvue` scope:
-
-### 1. Configure npm Registry
-
-Create or edit `~/.npmrc` (or `.npmrc` in your project root):
-
-```bash
-@chainvue:registry=https://npm.pkg.github.com
-```
-
-### 2. Install Package
-
 ```bash
 npm install @chainvue/sdk
 # or
 yarn add @chainvue/sdk
 # or
 pnpm add @chainvue/sdk
-```
-
-### Authentication (if needed)
-
-If the package requires authentication, add your GitHub Personal Access Token to `~/.npmrc`:
-
-```
-//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
 ```
 
 ## Quick Start
