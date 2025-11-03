@@ -447,7 +447,3 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 - **Issues:** [GitHub Issues](https://github.com/chainvue/chainvue-rest-api/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/chainvue/chainvue-rest-api/discussions)
-
----
-
-Built with ❤️ for the Verus community | Auto-generated from [ChainVue REST API](https://github.com/chainvue/chainvue-rest-api)
