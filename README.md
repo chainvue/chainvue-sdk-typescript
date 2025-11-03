@@ -420,15 +420,12 @@ This SDK is **auto-generated** from the ChainVue OpenAPI specification.
 
 **Important:** Do not manually edit generated files (api/, models/, etc.). All changes will be overwritten when the SDK is regenerated.
 
-To suggest improvements, please open an issue in the [REST API repository](https://github.com/chainvue/chainvue-rest-api).
-
 ## Links
 
 - **Live API:** [https://api.chainvue.io](https://api.chainvue.io)
 - **npm Package:** [@chainvue/sdk](https://www.npmjs.com/package/@chainvue/sdk)
-- **REST API Repo:** [chainvue/chainvue-rest-api](https://github.com/chainvue/chainvue-rest-api)
-- **SDK Repo:** [chainvue/chainvue-sdk-typescript](https://github.com/chainvue/chainvue-sdk-typescript)
-- **OpenAPI Spec:** [openapi.json](https://api.chainvue.io/openapi.json)
+- **SDK Repository:** [chainvue/chainvue-sdk-typescript](https://github.com/chainvue/chainvue-sdk-typescript)
+- **OpenAPI Spec:** [openapi.json](https://api.chainvue.io/api-docs/openapi.json)
 
 ## Supported Environments
 
@@ -445,5 +442,5 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Support
 
-- **Issues:** [GitHub Issues](https://github.com/chainvue/chainvue-rest-api/issues)
-- **Discussions:** [GitHub Discussions](https://github.com/chainvue/chainvue-rest-api/discussions)
+- **Issues:** [GitHub Issues](https://github.com/chainvue/chainvue-sdk-typescript/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/chainvue/chainvue-sdk-typescript/discussions)
