@@ -15,13 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ListBlocks200ResponseMeta } from './list-blocks200-response-meta';
+import type { ListBlocks200ResponseDataInner } from './list-blocks200-response-data-inner';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { T } from './t';
+import type { ListBlocks200ResponseMeta } from './list-blocks200-response-meta';
 
 export interface ListBlocks200Response {
-    'data': Array<T>;
+    'data': Array<ListBlocks200ResponseDataInner>;
     'meta': ListBlocks200ResponseMeta;
     'success': boolean;
 }

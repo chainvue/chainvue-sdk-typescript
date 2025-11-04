@@ -19,7 +19,7 @@ export interface Transaction {
     'block_height'?: number | null;
     'chain_id': string;
     'is_coinbase': boolean;
-    'raw'?: any | null;
+    'raw'?: any;
     'ts'?: number | null;
     'tx_index': number;
     'txid': string;

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**Array&lt;T&gt;**](T.md) |  | [default to undefined]
+**data** | [**Array&lt;ListBlocks200ResponseDataInner&gt;**](ListBlocks200ResponseDataInner.md) |  | [default to undefined]
 **meta** | [**ListBlocks200ResponseMeta**](ListBlocks200ResponseMeta.md) |  | [default to undefined]
 **success** | **boolean** |  | [default to undefined]
 

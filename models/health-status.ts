@@ -17,7 +17,10 @@
 export interface HealthStatus {
     'app_database': string;
     'blockchain_database': string;
+    'redis': string;
     'status': string;
+    'timestamp': number;
+    'uptime_seconds'?: number | null;
     'version': string;
 }
 

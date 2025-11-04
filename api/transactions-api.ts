@@ -22,7 +22,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { ListBlocks200Response } from '../models';
+import type { ListTransactions200Response } from '../models';
 // @ts-ignore
 import type { Transaction } from '../models';
 /**
@@ -242,7 +242,7 @@ export const TransactionsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listTransactions(chainId?: string, limit?: number, offset?: number, sort?: string, minBlockHeight?: number | null, maxBlockHeight?: number | null, minTimestamp?: number | null, maxTimestamp?: number | null, address?: string | null, includeCount?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListBlocks200Response>> {
+        async listTransactions(chainId?: string, limit?: number, offset?: number, sort?: string, minBlockHeight?: number | null, maxBlockHeight?: number | null, minTimestamp?: number | null, maxTimestamp?: number | null, address?: string | null, includeCount?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListTransactions200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listTransactions(chainId, limit, offset, sort, minBlockHeight, maxBlockHeight, minTimestamp, maxTimestamp, address, includeCount, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TransactionsApi.listTransactions']?.[localVarOperationServerIndex]?.url;
@@ -291,7 +291,7 @@ export const TransactionsApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTransactions(chainId?: string, limit?: number, offset?: number, sort?: string, minBlockHeight?: number | null, maxBlockHeight?: number | null, minTimestamp?: number | null, maxTimestamp?: number | null, address?: string | null, includeCount?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ListBlocks200Response> {
+        listTransactions(chainId?: string, limit?: number, offset?: number, sort?: string, minBlockHeight?: number | null, maxBlockHeight?: number | null, minTimestamp?: number | null, maxTimestamp?: number | null, address?: string | null, includeCount?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ListTransactions200Response> {
             return localVarFp.listTransactions(chainId, limit, offset, sort, minBlockHeight, maxBlockHeight, minTimestamp, maxTimestamp, address, includeCount, options).then((request) => request(axios, basePath));
         },
     };

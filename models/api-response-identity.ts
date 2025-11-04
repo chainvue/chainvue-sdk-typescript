@@ -13,9 +13,17 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ApiResponseAddressMeta } from './api-response-address-meta';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ApiResponseIdentityData } from './api-response-identity-data';
 
-export interface ApiResponseMeta {
-    'request_id': string;
-    'timestamp': string;
+export interface ApiResponseIdentity {
+    'data'?: ApiResponseIdentityData;
+    'error'?: string | null;
+    'meta': ApiResponseAddressMeta;
+    'success': boolean;
 }
 

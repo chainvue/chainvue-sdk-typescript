@@ -16,14 +16,20 @@
 
 export interface Currency {
     'chain_id': string;
+    'created_at'?: string | null;
+    'created_block'?: number | null;
+    'created_txid'?: string | null;
     'currency_id': string;
     'currency_type'?: string | null;
     'initial_supply'?: string | null;
     'is_pbaas_chain'?: boolean | null;
     'is_token'?: boolean | null;
+    'launch_system_id'?: string | null;
     'name': string;
     'options': number;
-    'raw_data'?: any | null;
+    'parent_currency_id'?: string | null;
+    'proof_protocol'?: number | null;
+    'raw_data'?: any;
     'version'?: number | null;
 }
 

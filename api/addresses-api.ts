@@ -24,7 +24,7 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { Address } from '../models';
 // @ts-ignore
-import type { PaginatedApiResponse } from '../models';
+import type { PaginatedApiResponseAddress } from '../models';
 // @ts-ignore
 import type { Transaction } from '../models';
 /**
@@ -286,7 +286,7 @@ export const AddressesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getRichlist(chainId?: string, limit?: number, offset?: number, includeCount?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedApiResponse>> {
+        async getRichlist(chainId?: string, limit?: number, offset?: number, includeCount?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedApiResponseAddress>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRichlist(chainId, limit, offset, includeCount, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AddressesApi.getRichlist']?.[localVarOperationServerIndex]?.url;
@@ -343,7 +343,7 @@ export const AddressesApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getRichlist(chainId?: string, limit?: number, offset?: number, includeCount?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<PaginatedApiResponse> {
+        getRichlist(chainId?: string, limit?: number, offset?: number, includeCount?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<PaginatedApiResponseAddress> {
             return localVarFp.getRichlist(chainId, limit, offset, includeCount, options).then((request) => request(axios, basePath));
         },
     };

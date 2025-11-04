@@ -179,7 +179,7 @@ const { status, data } = await apiInstance.getAddressTransactions(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getRichlist**
-> PaginatedApiResponse getRichlist()
+> PaginatedApiResponseAddress getRichlist()
 
 
 ### Example
@@ -218,7 +218,7 @@ const { status, data } = await apiInstance.getRichlist(
 
 ### Return type
 
-**PaginatedApiResponse**
+**PaginatedApiResponseAddress**
 
 ### Authorization
 

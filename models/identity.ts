@@ -20,8 +20,8 @@ export interface Identity {
     'identity_address': string;
     'minimum_signatures'?: number | null;
     'name': string;
-    'primary_addresses'?: any | null;
-    'raw_data'?: any | null;
+    'primary_addresses'?: any;
+    'raw_data'?: any;
     'update_count'?: number | null;
 }
 

@@ -18,7 +18,7 @@ export interface Block {
     'bits'?: string | null;
     'chain_id': string;
     'difficulty'?: number | null;
-    'extras'?: any | null;
+    'extras'?: any;
     'hash': string;
     'height': number;
     'merkleroot'?: string | null;

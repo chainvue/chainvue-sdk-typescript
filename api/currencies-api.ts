@@ -22,17 +22,18 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { CurrencyDetail } from '../models';
+import type { ApiResponseCurrencyDetail } from '../models';
 // @ts-ignore
-import type { PaginatedApiResponse } from '../models';
+import type { PaginatedApiResponseCurrency } from '../models';
 /**
  * CurrenciesApi - axios parameter creator
  */
 export const CurrenciesApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
-         * @param {string} currencyId Currency ID
+         * Retrieve detailed information about a specific currency including all its reserve currencies and weights. Returns the currency definition along with reserve backing information for fractional reserve currencies.
+         * @summary Get currency details
+         * @param {string} currencyId Unique identifier for the currency (i-address format)
          * @param {string} [chainId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -73,7 +74,8 @@ export const CurrenciesApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
+         * Retrieve a paginated list of all currencies for a specific chain. Supports optional search filtering by currency name with case-insensitive matching. Results are cached for 60 seconds.
+         * @summary List all currencies
          * @param {string} [chainId] 
          * @param {number} [limit] 
          * @param {number} [offset] 
@@ -135,20 +137,22 @@ export const CurrenciesApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = CurrenciesApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
-         * @param {string} currencyId Currency ID
+         * Retrieve detailed information about a specific currency including all its reserve currencies and weights. Returns the currency definition along with reserve backing information for fractional reserve currencies.
+         * @summary Get currency details
+         * @param {string} currencyId Unique identifier for the currency (i-address format)
          * @param {string} [chainId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCurrency(currencyId: string, chainId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CurrencyDetail>> {
+        async getCurrency(currencyId: string, chainId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ApiResponseCurrencyDetail>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getCurrency(currencyId, chainId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CurrenciesApi.getCurrency']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * 
+         * Retrieve a paginated list of all currencies for a specific chain. Supports optional search filtering by currency name with case-insensitive matching. Results are cached for 60 seconds.
+         * @summary List all currencies
          * @param {string} [chainId] 
          * @param {number} [limit] 
          * @param {number} [offset] 
@@ -156,7 +160,7 @@ export const CurrenciesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listCurrencies(chainId?: string, limit?: number, offset?: number, search?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedApiResponse>> {
+        async listCurrencies(chainId?: string, limit?: number, offset?: number, search?: string | null, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedApiResponseCurrency>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.listCurrencies(chainId, limit, offset, search, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['CurrenciesApi.listCurrencies']?.[localVarOperationServerIndex]?.url;
@@ -172,17 +176,19 @@ export const CurrenciesApiFactory = function (configuration?: Configuration, bas
     const localVarFp = CurrenciesApiFp(configuration)
     return {
         /**
-         * 
-         * @param {string} currencyId Currency ID
+         * Retrieve detailed information about a specific currency including all its reserve currencies and weights. Returns the currency definition along with reserve backing information for fractional reserve currencies.
+         * @summary Get currency details
+         * @param {string} currencyId Unique identifier for the currency (i-address format)
          * @param {string} [chainId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCurrency(currencyId: string, chainId?: string, options?: RawAxiosRequestConfig): AxiosPromise<CurrencyDetail> {
+        getCurrency(currencyId: string, chainId?: string, options?: RawAxiosRequestConfig): AxiosPromise<ApiResponseCurrencyDetail> {
             return localVarFp.getCurrency(currencyId, chainId, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Retrieve a paginated list of all currencies for a specific chain. Supports optional search filtering by currency name with case-insensitive matching. Results are cached for 60 seconds.
+         * @summary List all currencies
          * @param {string} [chainId] 
          * @param {number} [limit] 
          * @param {number} [offset] 
@@ -190,7 +196,7 @@ export const CurrenciesApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listCurrencies(chainId?: string, limit?: number, offset?: number, search?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<PaginatedApiResponse> {
+        listCurrencies(chainId?: string, limit?: number, offset?: number, search?: string | null, options?: RawAxiosRequestConfig): AxiosPromise<PaginatedApiResponseCurrency> {
             return localVarFp.listCurrencies(chainId, limit, offset, search, options).then((request) => request(axios, basePath));
         },
     };
@@ -201,8 +207,9 @@ export const CurrenciesApiFactory = function (configuration?: Configuration, bas
  */
 export class CurrenciesApi extends BaseAPI {
     /**
-     * 
-     * @param {string} currencyId Currency ID
+     * Retrieve detailed information about a specific currency including all its reserve currencies and weights. Returns the currency definition along with reserve backing information for fractional reserve currencies.
+     * @summary Get currency details
+     * @param {string} currencyId Unique identifier for the currency (i-address format)
      * @param {string} [chainId] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -212,7 +219,8 @@ export class CurrenciesApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Retrieve a paginated list of all currencies for a specific chain. Supports optional search filtering by currency name with case-insensitive matching. Results are cached for 60 seconds.
+     * @summary List all currencies
      * @param {string} [chainId] 
      * @param {number} [limit] 
      * @param {number} [offset] 

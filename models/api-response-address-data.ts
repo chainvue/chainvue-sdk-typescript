@@ -13,16 +13,13 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ListBlocks200ResponseMeta } from './list-blocks200-response-meta';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { T } from './t';
 
-export interface PaginatedApiResponse {
-    'data': Array<T>;
-    'meta': ListBlocks200ResponseMeta;
-    'success': boolean;
+export interface ApiResponseAddressData {
+    'address': string;
+    'balance': string;
+    'chain_id': string;
+    'total_received'?: string | null;
+    'total_sent'?: string | null;
+    'tx_count'?: number | null;
 }
 

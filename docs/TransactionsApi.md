@@ -113,7 +113,7 @@ const { status, data } = await apiInstance.getTransaction(
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **listTransactions**
-> ListBlocks200Response listTransactions()
+> ListTransactions200Response listTransactions()
 
 
 ### Example
@@ -170,7 +170,7 @@ const { status, data } = await apiInstance.listTransactions(
 
 ### Return type
 
-**ListBlocks200Response**
+**ListTransactions200Response**
 
 ### Authorization
 

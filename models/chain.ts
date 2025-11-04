@@ -19,7 +19,7 @@ export interface Chain {
     'chain_name': string;
     'first_block'?: number | null;
     'last_block'?: number | null;
-    'metadata'?: any | null;
+    'metadata'?: any;
     'network': string;
 }
 

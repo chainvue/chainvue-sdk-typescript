@@ -13,17 +13,13 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { ApiResponseMeta } from './api-response-meta';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { T } from './t';
 
-export interface ApiResponse {
-    'data'?: T | null;
-    'error'?: string | null;
-    'meta': ApiResponseMeta;
-    'success': boolean;
+export interface ApiResponseChainData {
+    'chain_id': string;
+    'chain_name': string;
+    'first_block'?: number | null;
+    'last_block'?: number | null;
+    'metadata'?: any;
+    'network': string;
 }
 
