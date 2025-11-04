@@ -14,13 +14,12 @@
 
 
 
-export * from './api/addresses-api';
-export * from './api/blocks-api';
-export * from './api/chains-api';
-export * from './api/currencies-api';
-export * from './api/health-api';
-export * from './api/identities-api';
-export * from './api/search-api';
-export * from './api/stats-api';
-export * from './api/transactions-api';
+export interface CurrencyReserve {
+    'chain_id': string;
+    'currency_id': string;
+    'reserve_amount'?: string | null;
+    'reserve_currency_id': string;
+    'reserve_currency_name'?: string | null;
+    'weight'?: number | null;
+}
 

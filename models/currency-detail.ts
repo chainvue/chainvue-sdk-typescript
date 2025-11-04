@@ -13,14 +13,16 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Currency } from './currency';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { CurrencyReserve } from './currency-reserve';
 
-export * from './api/addresses-api';
-export * from './api/blocks-api';
-export * from './api/chains-api';
-export * from './api/currencies-api';
-export * from './api/health-api';
-export * from './api/identities-api';
-export * from './api/search-api';
-export * from './api/stats-api';
-export * from './api/transactions-api';
+/**
+ * @type CurrencyDetail
+ */
+export type CurrencyDetail = Currency;
+
 

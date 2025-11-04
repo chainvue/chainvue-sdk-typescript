@@ -14,13 +14,12 @@
 
 
 
-export * from './api/addresses-api';
-export * from './api/blocks-api';
-export * from './api/chains-api';
-export * from './api/currencies-api';
-export * from './api/health-api';
-export * from './api/identities-api';
-export * from './api/search-api';
-export * from './api/stats-api';
-export * from './api/transactions-api';
+export interface NetworkStats {
+    'active_addresses_24h': number;
+    'avg_block_time': number;
+    'block_height': number;
+    'network_difficulty': number;
+    'total_addresses': number;
+    'total_transactions': number;
+}
 

@@ -6,6 +6,7 @@ All URIs are relative to *http://localhost*
 |------------- | ------------- | -------------|
 |[**getBlock**](#getblock) | **GET** /v1/blocks/{height_or_hash} | |
 |[**getLatestBlock**](#getlatestblock) | **GET** /v1/blocks/latest | |
+|[**listBlocks**](#listblocks) | **GET** /v1/blocks | |
 
 # **getBlock**
 > Block getBlock()
@@ -109,6 +110,81 @@ const { status, data } = await apiInstance.getLatestBlock(
 |-------------|-------------|------------------|
 |**200** | Latest block found |  -  |
 |**404** | No blocks found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **listBlocks**
+> ListBlocks200Response listBlocks()
+
+
+### Example
+
+```typescript
+import {
+    BlocksApi,
+    Configuration
+} from '@chainvue/sdk';
+
+const configuration = new Configuration();
+const apiInstance = new BlocksApi(configuration);
+
+let chainId: string; // (optional) (default to undefined)
+let limit: number; // (optional) (default to undefined)
+let offset: number; // (optional) (default to undefined)
+let sort: string; // (optional) (default to undefined)
+let minHeight: number; // (optional) (default to undefined)
+let maxHeight: number; // (optional) (default to undefined)
+let minTimestamp: number; // (optional) (default to undefined)
+let maxTimestamp: number; // (optional) (default to undefined)
+let includeCount: boolean; // (optional) (default to undefined)
+
+const { status, data } = await apiInstance.listBlocks(
+    chainId,
+    limit,
+    offset,
+    sort,
+    minHeight,
+    maxHeight,
+    minTimestamp,
+    maxTimestamp,
+    includeCount
+);
+```
+
+### Parameters
+
+|Name | Type | Description  | Notes|
+|------------- | ------------- | ------------- | -------------|
+| **chainId** | [**string**] |  | (optional) defaults to undefined|
+| **limit** | [**number**] |  | (optional) defaults to undefined|
+| **offset** | [**number**] |  | (optional) defaults to undefined|
+| **sort** | [**string**] |  | (optional) defaults to undefined|
+| **minHeight** | [**number**] |  | (optional) defaults to undefined|
+| **maxHeight** | [**number**] |  | (optional) defaults to undefined|
+| **minTimestamp** | [**number**] |  | (optional) defaults to undefined|
+| **maxTimestamp** | [**number**] |  | (optional) defaults to undefined|
+| **includeCount** | [**boolean**] |  | (optional) defaults to undefined|
+
+
+### Return type
+
+**ListBlocks200Response**
+
+### Authorization
+
+[api_key](../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+|**200** | List of blocks |  -  |
+|**400** | Invalid parameters |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

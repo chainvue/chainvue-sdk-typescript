@@ -22,6 +22,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
+import type { ListBlocks200Response } from '../models';
+// @ts-ignore
 import type { Transaction } from '../models';
 /**
  * TransactionsApi - axios parameter creator
@@ -108,6 +110,89 @@ export const TransactionsApiAxiosParamCreator = function (configuration?: Config
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {string} [chainId] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {string} [sort] 
+         * @param {number | null} [minBlockHeight] 
+         * @param {number | null} [maxBlockHeight] 
+         * @param {number | null} [minTimestamp] 
+         * @param {number | null} [maxTimestamp] 
+         * @param {string | null} [address] 
+         * @param {boolean} [includeCount] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTransactions: async (chainId?: string, limit?: number, offset?: number, sort?: string, minBlockHeight?: number | null, maxBlockHeight?: number | null, minTimestamp?: number | null, maxTimestamp?: number | null, address?: string | null, includeCount?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/transactions`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (chainId !== undefined) {
+                localVarQueryParameter['chain_id'] = chainId;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (minBlockHeight !== undefined) {
+                localVarQueryParameter['min_block_height'] = minBlockHeight;
+            }
+
+            if (maxBlockHeight !== undefined) {
+                localVarQueryParameter['max_block_height'] = maxBlockHeight;
+            }
+
+            if (minTimestamp !== undefined) {
+                localVarQueryParameter['min_timestamp'] = minTimestamp;
+            }
+
+            if (maxTimestamp !== undefined) {
+                localVarQueryParameter['max_timestamp'] = maxTimestamp;
+            }
+
+            if (address !== undefined) {
+                localVarQueryParameter['address'] = address;
+            }
+
+            if (includeCount !== undefined) {
+                localVarQueryParameter['include_count'] = includeCount;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -142,6 +227,27 @@ export const TransactionsApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['TransactionsApi.getTransaction']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {string} [chainId] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {string} [sort] 
+         * @param {number | null} [minBlockHeight] 
+         * @param {number | null} [maxBlockHeight] 
+         * @param {number | null} [minTimestamp] 
+         * @param {number | null} [maxTimestamp] 
+         * @param {string | null} [address] 
+         * @param {boolean} [includeCount] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listTransactions(chainId?: string, limit?: number, offset?: number, sort?: string, minBlockHeight?: number | null, maxBlockHeight?: number | null, minTimestamp?: number | null, maxTimestamp?: number | null, address?: string | null, includeCount?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListBlocks200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listTransactions(chainId, limit, offset, sort, minBlockHeight, maxBlockHeight, minTimestamp, maxTimestamp, address, includeCount, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['TransactionsApi.listTransactions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -170,6 +276,24 @@ export const TransactionsApiFactory = function (configuration?: Configuration, b
         getTransaction(txid: string, chainId?: string, options?: RawAxiosRequestConfig): AxiosPromise<Transaction> {
             return localVarFp.getTransaction(txid, chainId, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {string} [chainId] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {string} [sort] 
+         * @param {number | null} [minBlockHeight] 
+         * @param {number | null} [maxBlockHeight] 
+         * @param {number | null} [minTimestamp] 
+         * @param {number | null} [maxTimestamp] 
+         * @param {string | null} [address] 
+         * @param {boolean} [includeCount] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTransactions(chainId?: string, limit?: number, offset?: number, sort?: string, minBlockHeight?: number | null, maxBlockHeight?: number | null, minTimestamp?: number | null, maxTimestamp?: number | null, address?: string | null, includeCount?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ListBlocks200Response> {
+            return localVarFp.listTransactions(chainId, limit, offset, sort, minBlockHeight, maxBlockHeight, minTimestamp, maxTimestamp, address, includeCount, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -196,6 +320,25 @@ export class TransactionsApi extends BaseAPI {
      */
     public getTransaction(txid: string, chainId?: string, options?: RawAxiosRequestConfig) {
         return TransactionsApiFp(this.configuration).getTransaction(txid, chainId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} [chainId] 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {string} [sort] 
+     * @param {number | null} [minBlockHeight] 
+     * @param {number | null} [maxBlockHeight] 
+     * @param {number | null} [minTimestamp] 
+     * @param {number | null} [maxTimestamp] 
+     * @param {string | null} [address] 
+     * @param {boolean} [includeCount] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public listTransactions(chainId?: string, limit?: number, offset?: number, sort?: string, minBlockHeight?: number | null, maxBlockHeight?: number | null, minTimestamp?: number | null, maxTimestamp?: number | null, address?: string | null, includeCount?: boolean, options?: RawAxiosRequestConfig) {
+        return TransactionsApiFp(this.configuration).listTransactions(chainId, limit, offset, sort, minBlockHeight, maxBlockHeight, minTimestamp, maxTimestamp, address, includeCount, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

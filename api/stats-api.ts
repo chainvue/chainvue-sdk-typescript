@@ -22,26 +22,24 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { Block } from '../models';
+import type { DailyVolume } from '../models';
 // @ts-ignore
-import type { ListBlocks200Response } from '../models';
+import type { IdentityActivity } from '../models';
+// @ts-ignore
+import type { NetworkStats } from '../models';
 /**
- * BlocksApi - axios parameter creator
+ * StatsApi - axios parameter creator
  */
-export const BlocksApiAxiosParamCreator = function (configuration?: Configuration) {
+export const StatsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {string} heightOrHash Block height (numeric) or block hash
          * @param {string} [chainId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getBlock: async (heightOrHash: string, chainId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'heightOrHash' is not null or undefined
-            assertParamExists('getBlock', 'heightOrHash', heightOrHash)
-            const localVarPath = `/v1/blocks/{height_or_hash}`
-                .replace(`{${"height_or_hash"}}`, encodeURIComponent(String(heightOrHash)));
+        getIdentityCreation: async (chainId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/stats/identity-creation`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -78,8 +76,8 @@ export const BlocksApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getLatestBlock: async (chainId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/v1/blocks/latest`;
+        getNetworkStats: async (chainId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/stats`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -113,19 +111,11 @@ export const BlocksApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @param {string} [chainId] 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
-         * @param {string} [sort] 
-         * @param {number | null} [minHeight] 
-         * @param {number | null} [maxHeight] 
-         * @param {number | null} [minTimestamp] 
-         * @param {number | null} [maxTimestamp] 
-         * @param {boolean} [includeCount] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listBlocks: async (chainId?: string, limit?: number, offset?: number, sort?: string, minHeight?: number | null, maxHeight?: number | null, minTimestamp?: number | null, maxTimestamp?: number | null, includeCount?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/v1/blocks`;
+        getTxVolume: async (chainId?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/stats/tx-volume`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -143,38 +133,6 @@ export const BlocksApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (chainId !== undefined) {
                 localVarQueryParameter['chain_id'] = chainId;
-            }
-
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-            if (offset !== undefined) {
-                localVarQueryParameter['offset'] = offset;
-            }
-
-            if (sort !== undefined) {
-                localVarQueryParameter['sort'] = sort;
-            }
-
-            if (minHeight !== undefined) {
-                localVarQueryParameter['min_height'] = minHeight;
-            }
-
-            if (maxHeight !== undefined) {
-                localVarQueryParameter['max_height'] = maxHeight;
-            }
-
-            if (minTimestamp !== undefined) {
-                localVarQueryParameter['min_timestamp'] = minTimestamp;
-            }
-
-            if (maxTimestamp !== undefined) {
-                localVarQueryParameter['max_timestamp'] = maxTimestamp;
-            }
-
-            if (includeCount !== undefined) {
-                localVarQueryParameter['include_count'] = includeCount;
             }
 
 
@@ -192,22 +150,21 @@ export const BlocksApiAxiosParamCreator = function (configuration?: Configuratio
 };
 
 /**
- * BlocksApi - functional programming interface
+ * StatsApi - functional programming interface
  */
-export const BlocksApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = BlocksApiAxiosParamCreator(configuration)
+export const StatsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = StatsApiAxiosParamCreator(configuration)
     return {
         /**
          * 
-         * @param {string} heightOrHash Block height (numeric) or block hash
          * @param {string} [chainId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getBlock(heightOrHash: string, chainId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Block>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getBlock(heightOrHash, chainId, options);
+        async getIdentityCreation(chainId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<IdentityActivity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getIdentityCreation(chainId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BlocksApi.getBlock']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StatsApi.getIdentityCreation']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -216,50 +173,41 @@ export const BlocksApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getLatestBlock(chainId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Block>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getLatestBlock(chainId, options);
+        async getNetworkStats(chainId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkStats>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getNetworkStats(chainId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BlocksApi.getLatestBlock']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StatsApi.getNetworkStats']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
          * @param {string} [chainId] 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
-         * @param {string} [sort] 
-         * @param {number | null} [minHeight] 
-         * @param {number | null} [maxHeight] 
-         * @param {number | null} [minTimestamp] 
-         * @param {number | null} [maxTimestamp] 
-         * @param {boolean} [includeCount] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async listBlocks(chainId?: string, limit?: number, offset?: number, sort?: string, minHeight?: number | null, maxHeight?: number | null, minTimestamp?: number | null, maxTimestamp?: number | null, includeCount?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListBlocks200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listBlocks(chainId, limit, offset, sort, minHeight, maxHeight, minTimestamp, maxTimestamp, includeCount, options);
+        async getTxVolume(chainId?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<DailyVolume>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTxVolume(chainId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BlocksApi.listBlocks']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['StatsApi.getTxVolume']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * BlocksApi - factory interface
+ * StatsApi - factory interface
  */
-export const BlocksApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = BlocksApiFp(configuration)
+export const StatsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = StatsApiFp(configuration)
     return {
         /**
          * 
-         * @param {string} heightOrHash Block height (numeric) or block hash
          * @param {string} [chainId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getBlock(heightOrHash: string, chainId?: string, options?: RawAxiosRequestConfig): AxiosPromise<Block> {
-            return localVarFp.getBlock(heightOrHash, chainId, options).then((request) => request(axios, basePath));
+        getIdentityCreation(chainId?: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<IdentityActivity>> {
+            return localVarFp.getIdentityCreation(chainId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -267,42 +215,33 @@ export const BlocksApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getLatestBlock(chainId?: string, options?: RawAxiosRequestConfig): AxiosPromise<Block> {
-            return localVarFp.getLatestBlock(chainId, options).then((request) => request(axios, basePath));
+        getNetworkStats(chainId?: string, options?: RawAxiosRequestConfig): AxiosPromise<NetworkStats> {
+            return localVarFp.getNetworkStats(chainId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} [chainId] 
-         * @param {number} [limit] 
-         * @param {number} [offset] 
-         * @param {string} [sort] 
-         * @param {number | null} [minHeight] 
-         * @param {number | null} [maxHeight] 
-         * @param {number | null} [minTimestamp] 
-         * @param {number | null} [maxTimestamp] 
-         * @param {boolean} [includeCount] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listBlocks(chainId?: string, limit?: number, offset?: number, sort?: string, minHeight?: number | null, maxHeight?: number | null, minTimestamp?: number | null, maxTimestamp?: number | null, includeCount?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<ListBlocks200Response> {
-            return localVarFp.listBlocks(chainId, limit, offset, sort, minHeight, maxHeight, minTimestamp, maxTimestamp, includeCount, options).then((request) => request(axios, basePath));
+        getTxVolume(chainId?: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<DailyVolume>> {
+            return localVarFp.getTxVolume(chainId, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * BlocksApi - object-oriented interface
+ * StatsApi - object-oriented interface
  */
-export class BlocksApi extends BaseAPI {
+export class StatsApi extends BaseAPI {
     /**
      * 
-     * @param {string} heightOrHash Block height (numeric) or block hash
      * @param {string} [chainId] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public getBlock(heightOrHash: string, chainId?: string, options?: RawAxiosRequestConfig) {
-        return BlocksApiFp(this.configuration).getBlock(heightOrHash, chainId, options).then((request) => request(this.axios, this.basePath));
+    public getIdentityCreation(chainId?: string, options?: RawAxiosRequestConfig) {
+        return StatsApiFp(this.configuration).getIdentityCreation(chainId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -311,26 +250,18 @@ export class BlocksApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public getLatestBlock(chainId?: string, options?: RawAxiosRequestConfig) {
-        return BlocksApiFp(this.configuration).getLatestBlock(chainId, options).then((request) => request(this.axios, this.basePath));
+    public getNetworkStats(chainId?: string, options?: RawAxiosRequestConfig) {
+        return StatsApiFp(this.configuration).getNetworkStats(chainId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} [chainId] 
-     * @param {number} [limit] 
-     * @param {number} [offset] 
-     * @param {string} [sort] 
-     * @param {number | null} [minHeight] 
-     * @param {number | null} [maxHeight] 
-     * @param {number | null} [minTimestamp] 
-     * @param {number | null} [maxTimestamp] 
-     * @param {boolean} [includeCount] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public listBlocks(chainId?: string, limit?: number, offset?: number, sort?: string, minHeight?: number | null, maxHeight?: number | null, minTimestamp?: number | null, maxTimestamp?: number | null, includeCount?: boolean, options?: RawAxiosRequestConfig) {
-        return BlocksApiFp(this.configuration).listBlocks(chainId, limit, offset, sort, minHeight, maxHeight, minTimestamp, maxTimestamp, includeCount, options).then((request) => request(this.axios, this.basePath));
+    public getTxVolume(chainId?: string, options?: RawAxiosRequestConfig) {
+        return StatsApiFp(this.configuration).getTxVolume(chainId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

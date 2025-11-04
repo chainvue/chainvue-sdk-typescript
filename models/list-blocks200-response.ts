@@ -13,14 +13,16 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ListBlocks200ResponseMeta } from './list-blocks200-response-meta';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { T } from './t';
 
-export * from './api/addresses-api';
-export * from './api/blocks-api';
-export * from './api/chains-api';
-export * from './api/currencies-api';
-export * from './api/health-api';
-export * from './api/identities-api';
-export * from './api/search-api';
-export * from './api/stats-api';
-export * from './api/transactions-api';
+export interface ListBlocks200Response {
+    'data': Array<T>;
+    'meta': ListBlocks200ResponseMeta;
+    'success': boolean;
+}
 

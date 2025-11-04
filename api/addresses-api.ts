@@ -24,6 +24,8 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { Address } from '../models';
 // @ts-ignore
+import type { PaginatedApiResponse } from '../models';
+// @ts-ignore
 import type { Transaction } from '../models';
 /**
  * AddressesApi - axios parameter creator
@@ -120,10 +122,11 @@ export const AddressesApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} [chainId] 
          * @param {number} [limit] 
          * @param {number} [offset] 
+         * @param {boolean} [includeCount] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAddressTransactions: async (address: string, chainId?: string, limit?: number, offset?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAddressTransactions: async (address: string, chainId?: string, limit?: number, offset?: number, includeCount?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'address' is not null or undefined
             assertParamExists('getAddressTransactions', 'address', address)
             const localVarPath = `/v1/addresses/{address}/transactions`
@@ -153,6 +156,63 @@ export const AddressesApiAxiosParamCreator = function (configuration?: Configura
 
             if (offset !== undefined) {
                 localVarQueryParameter['offset'] = offset;
+            }
+
+            if (includeCount !== undefined) {
+                localVarQueryParameter['include_count'] = includeCount;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} [chainId] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {boolean} [includeCount] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRichlist: async (chainId?: string, limit?: number, offset?: number, includeCount?: boolean, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/addresses/richlist`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            if (chainId !== undefined) {
+                localVarQueryParameter['chain_id'] = chainId;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (includeCount !== undefined) {
+                localVarQueryParameter['include_count'] = includeCount;
             }
 
 
@@ -207,13 +267,29 @@ export const AddressesApiFp = function(configuration?: Configuration) {
          * @param {string} [chainId] 
          * @param {number} [limit] 
          * @param {number} [offset] 
+         * @param {boolean} [includeCount] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAddressTransactions(address: string, chainId?: string, limit?: number, offset?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Transaction>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAddressTransactions(address, chainId, limit, offset, options);
+        async getAddressTransactions(address: string, chainId?: string, limit?: number, offset?: number, includeCount?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Transaction>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAddressTransactions(address, chainId, limit, offset, includeCount, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AddressesApi.getAddressTransactions']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {string} [chainId] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {boolean} [includeCount] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRichlist(chainId?: string, limit?: number, offset?: number, includeCount?: boolean, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedApiResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRichlist(chainId, limit, offset, includeCount, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AddressesApi.getRichlist']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -251,11 +327,24 @@ export const AddressesApiFactory = function (configuration?: Configuration, base
          * @param {string} [chainId] 
          * @param {number} [limit] 
          * @param {number} [offset] 
+         * @param {boolean} [includeCount] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAddressTransactions(address: string, chainId?: string, limit?: number, offset?: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<Transaction>> {
-            return localVarFp.getAddressTransactions(address, chainId, limit, offset, options).then((request) => request(axios, basePath));
+        getAddressTransactions(address: string, chainId?: string, limit?: number, offset?: number, includeCount?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<Array<Transaction>> {
+            return localVarFp.getAddressTransactions(address, chainId, limit, offset, includeCount, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} [chainId] 
+         * @param {number} [limit] 
+         * @param {number} [offset] 
+         * @param {boolean} [includeCount] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRichlist(chainId?: string, limit?: number, offset?: number, includeCount?: boolean, options?: RawAxiosRequestConfig): AxiosPromise<PaginatedApiResponse> {
+            return localVarFp.getRichlist(chainId, limit, offset, includeCount, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -292,11 +381,25 @@ export class AddressesApi extends BaseAPI {
      * @param {string} [chainId] 
      * @param {number} [limit] 
      * @param {number} [offset] 
+     * @param {boolean} [includeCount] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public getAddressTransactions(address: string, chainId?: string, limit?: number, offset?: number, options?: RawAxiosRequestConfig) {
-        return AddressesApiFp(this.configuration).getAddressTransactions(address, chainId, limit, offset, options).then((request) => request(this.axios, this.basePath));
+    public getAddressTransactions(address: string, chainId?: string, limit?: number, offset?: number, includeCount?: boolean, options?: RawAxiosRequestConfig) {
+        return AddressesApiFp(this.configuration).getAddressTransactions(address, chainId, limit, offset, includeCount, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} [chainId] 
+     * @param {number} [limit] 
+     * @param {number} [offset] 
+     * @param {boolean} [includeCount] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public getRichlist(chainId?: string, limit?: number, offset?: number, includeCount?: boolean, options?: RawAxiosRequestConfig) {
+        return AddressesApiFp(this.configuration).getRichlist(chainId, limit, offset, includeCount, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

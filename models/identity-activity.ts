@@ -14,13 +14,9 @@
 
 
 
-export * from './api/addresses-api';
-export * from './api/blocks-api';
-export * from './api/chains-api';
-export * from './api/currencies-api';
-export * from './api/health-api';
-export * from './api/identities-api';
-export * from './api/search-api';
-export * from './api/stats-api';
-export * from './api/transactions-api';
+export interface IdentityActivity {
+    'creations': number;
+    'date': string;
+    'updates': number;
+}
 
